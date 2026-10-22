@@ -2,7 +2,8 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>HBD love</title>	    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Meri Mini ❤️ | Astha</title>	    
     <link type="text/css" rel="stylesheet" href="./file/default.css">
     <script type="text/javascript" src="./file/jquery.min.js"></script>
     <script type="text/javascript" src="./file/jscex.min.js"></script>
@@ -13,39 +14,618 @@
     <script type="text/javascript" src="./file/jscex-async-powerpack.min.js"></script>
     <script type="text/javascript" src="./file/functions.js" charset="utf-8"></script>
     <script type="text/javascript" src="./file/love.js" charset="utf-8"></script>
-    <script>
-        function playAudio() {
-            var audio = document.getElementById("myAudio");
-            audio.play();
-        }
-    </script>
 </head>
 <body>
+    <!-- Background Audio -->
+    <audio id="myAudio" loop="loop" preload="auto">
+        <source src="aud.mp3" type="audio/mp3" />
+    </audio>
+
+    <!-- Floating Audio Control -->
+    <button id="music-toggle" onclick="toggleAudio()" title="Toggle Music">🎵</button>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- THEATRICAL CURTAIN OVERLAY -->
+    <div id="curtain-container">
+        <div class="curtain-panel curtain-left"></div>
+        <div class="curtain-panel curtain-right"></div>
+        <div class="curtain-valance">
+            <span class="valance-tassel">✨</span>
+            <span class="valance-tassel">🎀</span>
+            <span class="valance-tassel">👑</span>
+            <span class="valance-tassel">🎀</span>
+            <span class="valance-tassel">✨</span>
+        </div>
+        <div id="curtain-stage-card">
+            <div class="stage-avatar-wrap" title="Click to view full photo" onclick="openLightbox('photos/astha_portrait.jpg', '👑 Meri Birthday Queen Astha — Meri Poori Duniya 🌸')">
+                <img src="photos/astha_portrait.jpg" alt="Astha - Birthday Queen" class="stage-avatar">
+                <div class="avatar-crown">👑</div>
+            </div>
+            <h1 class="stage-title">Happy Birthday Meri Mini!</h1>
+            <p class="stage-subtitle">Astha • 23rd October 2006 • Meri Jaan 🧿❤️</p>
+            <div class="stage-divider"></div>
+            <p class="stage-desc">
+                A special magical surprise crafted with all my love for the most precious person in my life.<br>
+                Click the ribbon below to pull the curtains and step inside!
+            </p>
+            <button id="open-curtain-btn" class="pull-curtain-btn" onclick="openCurtains()">
+                <span>🎀</span>
+                <span>Click To Pull The Curtains</span>
+                <span>✨</span>
+            </button>
+            <p class="stage-hint">🎵 Tap to open curtains & play our romantic song 🎶</p>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT WRAP -->
     <div id="main">
         <div id="error"><a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a> (<a href="http://firefox.com.cn/download/">Firefox</a>)</div>
-        <audio autoplay="autoplay" height="100" width="100" id="myAudio">
-            <source src="aud.mp3" type="audio/mp3" />
-            <embed height="100" width="100" src="aud.mp3" />
-        </audio>
+
         <div id="wrap">
+            <div id="seed-hint">👆 Click the glowing Heart to bloom our tree ❤️</div>
+
             <div id="text">
                 <div id="code">
-                    <span class="say">My beautiful wife 💞</span><br>
-                    <span class="say">Happy Birthday 🎈</span><br>
-                    <span class="say">May Allah bless you 🍀</span><br>
-                    <span class="say">And give u many happiness 💕</span><br>
-                    <span class="say">I loved you ❤️</span><br>
-                    <span class="say">And I will always love u 🥺 ❤️</span><br>
-                    <span class="say">Hope u have a great day today ❤️😘</span><br>
+                    <span class="code-title">Happy Birthday Meri Miniiii! 🎂❤️</span><br>
+                    <span class="say">Meri Babu, meri jaan, mera sukoon, mera ghar 🧿🎀</span><br>
+                    <span class="say">🌸 <b>Date of Birth:</b> 23rd October 2006 (Turning 20 Today!)</span><br>
+                    <span class="say">💕 <b>Official Relationship:</b> 27/08/2019 to Till The End ♾️</span><br>
+                    <span class="say">May Mahadev bless you with endless health & smiles 🍀</span><br>
+                    <span class="say">Aap mere liye sirf girlfriend nahi, mera future ho 🥹</span><br>
+                    <span class="say">Aapke paas aakar mera mann hamesha shaant ho jaata hai ❤️</span><br>
+                    <span class="say">And I have a forever question for you... 💍</span><br>
+                    <span class="say"><span class="space"></span>— Forever your pagal, Aapka duduu. ❤️</span>
+                </div>
+
+                <!-- Action Buttons: Marriage Proposal, Photo Gallery & Full Love Letter -->
+                <div class="action-buttons-wrap" id="action-buttons">
+                    <button class="btn-proposal" onclick="openProposalModal()">
+                        <span>💍</span>
+                        <span>Ek Sawaal Mere Dil Ka... (Astha, Click Here)</span>
+                        <span>💍</span>
+                    </button>
+                    <button class="btn-gallery" onclick="openGalleryModal()">
+                        <span>📸</span>
+                        <span>Hamari Yaadein (5 Special Moments)</span>
+                        <span>✨</span>
+                    </button>
+                    <button class="btn-letter" onclick="openLetterModal()">
+                        <span>💌</span>
+                        <span>Duduu's Full Love Letter For Astha 📜</span>
+                    </button>
+                <!-- LIVE RELATIONSHIP & MILESTONES BOX (Nested inside #text for zero overlap) -->
+                <div id="clock-box">
+                    <div class="milestone-badge">
+                        <span>👑 <b>Birthday Queen:</b> Astha (Mini)</span>
+                        <span class="milestone-dob">🎂 Born: 23/10/2006</span>
+                    </div>
+                    <div class="counter-title">
+                        <span>❤️</span>
+                        <span>Official Relationship: 27/08/2019 to Till The End ♾️</span>
+                    </div>
+                    <div class="timer-grid">
+                        <div class="timer-item">
+                            <span class="digit" id="rel-days">0</span>
+                            <span class="label">Days</span>
+                        </div>
+                        <div class="timer-item">
+                            <span class="digit" id="rel-hours">00</span>
+                            <span class="label">Hours</span>
+                        </div>
+                        <div class="timer-item">
+                            <span class="digit" id="rel-mins">00</span>
+                            <span class="label">Minutes</span>
+                        </div>
+                        <div class="timer-item">
+                            <span class="digit" id="rel-secs">00</span>
+                            <span class="label">Seconds</span>
+                        </div>
+                    </div>
+                    <div class="counter-sub">
+                        "27/08/2019 se shuru hua ye safar, aane wale har janam tak saath chalega... 💕"
+                    </div>
                 </div>
             </div>
-            <div id="clock-box">
-                <span id="clock">577 days 0 hours 0 minutes 0 seconds</span> <!-- Change to "6940 days..." if needed -->
-            </div>
+
             <canvas id="canvas" width="1100" height="680"></canvas>
         </div>
     </div>
 
+    <!-- MARRIAGE PROPOSAL MODAL -->
+    <div id="proposal-modal" class="modal-backdrop" style="display: none;">
+        <div class="proposal-card">
+            <button class="modal-close" onclick="closeProposalModal()">✕</button>
+            <div class="proposal-ring-container">
+                <div class="ring-box">
+                    <span>💍</span>
+                </div>
+            </div>
+            <h2 class="proposal-title">Meri Mini, Meri Jaan... 🥹❤️</h2>
+            
+            <div id="proposal-content">
+                <div class="proposal-poem">
+                    <p>Hum <b>27/08/2019</b> se ek doosre ke saath hain. Humne har khushi, har dukh, aur life ka har phase saath dekha hai.</p>
+                    <p>Aap mere liye kabhi bas ek girlfriend nahi rahe—aap mera ghar ho, mera sukoon ho, aur meri poori zindagi ho.</p>
+                    <p class="highlight-q">Will You Marry Me, Astha? 💍</p>
+                    <p class="proposal-sub">Will you spend the rest of your life making memories with your Duduu? 🥺❤️</p>
+                </div>
+                <div class="proposal-actions" id="proposal-buttons-area">
+                    <button id="btn-marry-yes" class="btn-yes" onclick="acceptProposal()">
+                        YES! A Million Times YES! 💍🥹❤️
+                    </button>
+                    <button id="btn-marry-no" class="btn-no">
+                        No 🙈
+                    </button>
+                </div>
+            </div>
+
+            <div id="proposal-accepted" style="display: none;" class="accepted-box">
+                <div class="accepted-hearts">🎉 💍 👰‍♀️ ❤️ 🤵‍♂️ 🎉</div>
+                <h3>SHE SAID YES! 😭😭❤️❤️</h3>
+                <div class="letter-photo-embed" style="max-width: 360px; margin: 12px auto;">
+                    <img src="photos/keychain_collage.jpg" alt="Two halves of one heart" onclick="openLightbox(this.src, 'Some gifts jo aaj tak smhal ke rakhe hai maine ❤️')">
+                    <div class="letter-photo-caption">Some gifts jo aaj tak smhal ke rakhe hai maine ❤️</div>
+                </div>
+                <p>Ab aap officially poori zindagi ke liye apne Duduu ke paas booked ho! 🧿</p>
+                <p>I love you so, so much Astha! Happy Birthday to my future wife! 🎀</p>
+                <p class="signature">— Forever your pagal, Aapka duduu ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEDICATED PHOTO GALLERY MODAL -->
+    <div id="gallery-modal" class="modal-backdrop" style="display: none;">
+        <div class="gallery-card">
+            <button class="modal-close" onclick="closeGalleryModal()">✕</button>
+            <div class="letter-header">
+                <span class="letter-stamp">📸 2019 • Till Eternity | Astha & Duduu</span>
+                <h2 class="letter-title">Hamari Sabse Pyaari Yaadein ❤️</h2>
+                <p class="letter-subtitle">5 Moments That Mean The Entire World To Me</p>
+            </div>
+            <div class="gallery-body">
+                <div style="text-align: center; margin-bottom: 12px; font-size: 13px; color: #ffd700;">
+                    🔍 <i>Click on any photo to view full size HD with zero cropping ✨</i>
+                </div>
+
+                <!-- THE MOST PRECIOUS PHOTO HERO SPOTLIGHT -->
+                <div class="precious-hero-card">
+                    <div class="precious-badge">⭐ OUR MOST PRECIOUS PHOTO IN THE WORLD ⭐</div>
+                    <div class="precious-img-wrap">
+                        <img src="photos/most_precious_school_days.jpg" alt="Our Most Precious School Memory" class="precious-img" onclick="openLightbox('photos/most_precious_school_days.jpg', '⭐ Our Most Precious Photo: School Days (2019) &lt;&lt; 😍 😍 😍 😍 &gt;&gt;')">
+                    </div>
+                    <p class="precious-caption">
+                        "Ek time tha jab hum bas school mein mile the then blue world ki trip and uske baad hamare bitaya gaya time kanpur me , aur dil mein ek doosre ke liye beintehaan pyaar. Jahan se sab shuru hua tha, wahi se hamara forever likha gaya tha. 🥺❤️"
+                    </p>
+                    <div class="precious-subnote">
+                        &lt;&lt; 😍 😍 😍 😍 &gt;&gt; — School Days Memory (2019 to Till The End)
+                    </div>
+                </div>
+
+                <!-- 4 OTHER TREASURED MEMORIES -->
+                <div class="gallery-grid">
+                    <div class="polaroid-card">
+                        <div class="polaroid-img-wrap">
+                            <img src="photos/astha_portrait.jpg" alt="Birthday Queen Astha" class="polaroid-img" onclick="openLightbox('photos/astha_portrait.jpg', '👑 Meri Birthday Queen Mini — Duniya Ki Sabse Khoobsurat Ladki 🌸')">
+                        </div>
+                        <p class="polaroid-desc">
+                            <b>👑 Birthday Queen Mini:</b> Chehre par ye haath aur pyaari si smile... Mann karta hai bas dekhta rahun! 🌸
+                        </p>
+                    </div>
+
+                    <div class="polaroid-card">
+                        <div class="polaroid-img-wrap">
+                            <img src="photos/keychain_collage.jpg" alt="Half Heart Keychain" class="polaroid-img" onclick="openLightbox('photos/keychain_collage.jpg', 'Some gifts jo aaj tak smhal ke rakhe hai maine ❤️')">
+                        </div>
+                        <p class="polaroid-desc">
+                            <b>🗝️</b> Some gifts jo aaj tak smhal ke rakhe hai maine ❤️
+                        </p>
+                    </div>
+
+                    <div class="polaroid-card">
+                        <div class="polaroid-img-wrap">
+                            <img src="photos/ethnic_earrings.jpg" alt="Traditional Beauty" class="polaroid-img" onclick="openLightbox('photos/ethnic_earrings.jpg', '✨ Traditional Look — Jhumke aur aapki masoomiyat 💖')">
+                        </div>
+                        <p class="polaroid-desc">
+                            <b>✨ Traditional Perfection:</b> Jhumke aur aapka ye gungunata hua andaaz... duniya ki sabse sundar ladki! 🎀
+                        </p>
+                    </div>
+
+                    <div class="polaroid-card">
+                        <div class="polaroid-img-wrap">
+                            <img src="photos/videocall_night.jpg" alt="Late Night Video Call" class="polaroid-img" onclick="openLightbox('photos/videocall_night.jpg', '🌙 Late Night Calls — Har raat ka sukoon 🫂❤️')">
+                        </div>
+                        <p class="polaroid-desc">
+                            <b>🌙 Late Night Calls:</b> Din bhar ki thakan ke baad sirf aapki awaaz aur smile se sukoon milta hai. 🥹❤️
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="letter-footer">
+                <button class="btn-close-letter" onclick="closeGalleryModal()">Close Gallery & Back To Tree 🌸</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FULL LOVE LETTER MODAL -->
+    <div id="letter-modal" class="modal-backdrop" style="display: none;">
+        <div class="letter-card">
+            <button class="modal-close" onclick="closeLetterModal()">✕</button>
+            <div class="letter-header">
+                <span class="letter-stamp">💌 23 • 10 • 2006 | Official: 27 • 08 • 2019</span>
+                <h2 class="letter-title">Meri Mini Ke Liye... ❤️</h2>
+                <p class="letter-subtitle">From Duduu with all my heart</p>
+            </div>
+            <div class="letter-body">
+                <p class="letter-p letter-intro">
+                    Happy Birthday meri Miniiii, meri Babu, meri jaan, mera sukoon, mera ghar, meri favourite person, meri poori duniyaaaaa. 😭❤️🧿🎀
+                </p>
+
+                <!-- Portrait photo embed -->
+                <div class="letter-photo-embed" style="max-width: 380px; margin: 14px auto;">
+                    <img src="photos/astha_portrait.jpg" alt="Astha" onclick="openLightbox('photos/astha_portrait.jpg', '👑 Meri Birthday Queen, meri poori duniya 🌸')">
+                    <div class="letter-photo-caption">Meri Birthday Queen, meri poori duniya 🌸👑</div>
+                </div>
+                
+                <p class="letter-p">
+                    Babuuuu, happiest birthday to the most precious person in my life. ❤️🥹 Aaj ka din mere liye bhi utna hi special hai jitna aapke liye, kyunki aaj ke din woh insaan duniya mein aaya tha jo ek din meri zindagi ka itna important part ban jayega, mujhe itna pyaar karna sikhayega, meri khushi ki wajah banega aur jiske bina main apni life imagine karna bhi pasand nahi karta. Kabhi kabhi na babu, main sochta hoon ki kitna ajeeb aur kitna beautiful hai ye sab. Ek time tha jab hum bas school mein mile the, aur aaj dekho, aap meri life ka woh hissa ban chuke ho jiske bina meri har khushi adhoori si lagti hai. 🥹❤️
+                </p>
+
+                <!-- THE MOST PRECIOUS PHOTO EMBEDDED DIRECTLY AT SCHOOL MEMORY -->
+                <div class="letter-photo-embed precious-embed">
+                    <img src="photos/most_precious_school_days.jpg" alt="Our Most Precious School Memory" onclick="openLightbox('photos/most_precious_school_days.jpg', '⭐ Hamari Sabse Precious Photo: School Days (2019) &lt;&lt; 😍 😍 😍 😍 &gt;&gt;')">
+                    <div class="letter-photo-caption">
+                        ⭐ <b>Hamari Sabse Precious Photo:</b> School Days (2019) Jahan Se Hamara Safar Shuru Hua Tha 🥺❤️ &lt;&lt; 😍😍😍😍 &gt;&gt;
+                    </div>
+                </div>
+
+                <p class="letter-p">
+                    Aapko pata hai babu, main shayad har baar apni feelings perfectly express nahi kar pata, shayad har baar woh sab nahi bol pata jo mere dil mein hota hai, lekin ek baat main aapko hamesha batana chahta hoon ki aap mere liye kabhi bhi bas ek girlfriend nahi rahe. Aap woh insaan ho jiske saath maine apna future imagine kiya hai, jiske saath main apni poori life spend karna chahta hoon, jiske saath main apni chhoti se chhoti khushi share karna chahta hoon aur jiske paas main apne din ke end mein laut kar aana chahta hoon. Aap mere liye sirf pyaar nahi ho babu, aap woh feeling ho jahan aakar mera mann shaant ho jaata hai. Aap mere liye home jaisa feel ho. ❤️🫂
+                </p>
+
+                <p class="letter-p">
+                    Meri Mini, aapko shayad kabhi kabhi lagta hoga ki main kitna pagal hoon, kitni baatein karta hoon, kitna pareshan karta hoon aapko, kitni baar aapko manata hoon aur kitni baar bina baat ke aapke peeche pada rehta hoon. 😭😂❤️ Lekin kya karun babu, aap ho hi itne special mere liye. Aapki smile, aapki awaaz, aapka gussa, aapka mujhe daantna, phir khud hi hans dena, aapka chhoti chhoti baaton par react karna, aapka woh apna sa andaaz… mujhe aapse judi har chhoti cheez pyaari lagti hai. Aap gussa bhi hote ho na, tab bhi mere liye wahi meri pyaari si Mini rehte ho. Aur jab aap haste ho na babu, kasam se, mann karta hai bas aapko dekhta rahun. 🥹🎀❤️
+                </p>
+
+                <!-- Keychain photo embed -->
+                <div class="letter-photo-embed" style="max-width: 400px; margin: 14px auto;">
+                    <img src="photos/keychain_collage.jpg" alt="Babu keychain" onclick="openLightbox('photos/keychain_collage.jpg', 'Some gifts jo aaj tak smhal ke rakhe hai maine ❤️')">
+                    <div class="letter-photo-caption">Some gifts jo aaj tak smhal ke rakhe hai maine ❤️</div>
+                </div>
+
+                <p class="letter-p">
+                    Kabhi kabhi mujhe yakeen hi nahi hota ki hum 2019 se ek doosre ko jaante hain. Itna waqt beet gaya, itni cheezein badal gayin, hum dono bade ho rahe hain, life mein naye naye phases aa rahe hain, lekin mere dil mein aapki jagah aaj bhi utni hi special hai. Aur sach kahun toh waqt ke saath meri feelings sirf badhi hain. Pehle shayad mujhe khud bhi nahi pata tha ki kisi insaan se itna attach ho sakta hoon, kisi ki khushi apni khushi se itni important lag sakti hai, kisi ki awaaz sunne se din achha ho sakta hai aur kisi se baat na hone par poora din ajeeb sa lag sakta hai. Phir aap meri life mein aaye aur mujhe ye sab samajh aaya. ❤️🥹
+                </p>
+
+                <p class="letter-p">
+                    Babu, aaj aapke birthday par main aapse sirf ye nahi kehna chahta ki I love you. Main aapse ye kehna chahta hoon ki main aapki respect karta hoon, aapki happiness mere liye matter karti hai, aapke dreams mere liye important hain aur main chahta hoon ki aap apni life mein woh sab achieve karo jiska aapne kabhi sapna dekha hai. Aap life mein bahut aage jao, successful bano, apne liye ek beautiful life banao, apni har wish poori karo aur kabhi apne aap par doubt mat karna. Jab aapko lage ki cheezein difficult hain, jab aap thak jao, jab aapko lage ki aap nahi kar paoge, tab bas yaad rakhna ki ek insaan hai jo aapki happiness ke liye dil se pray karta hai, jo aapko khush dekhna chahta hai aur jo hamesha chahega ki aap apni life mein shine karo. 🧿❤️
+                </p>
+
+                <p class="letter-p">
+                    Meri jaan, main chahta hoon ki aapki life mein itni khushiyan aayein ki aapko kabhi apni smile chhupani na pade. Aapko itna pyaar mile ki aapko kabhi apni importance question na karni pade. Aapke saare fears dheere dheere door ho jaayein, aapki saari wishes poori hon aur aapko woh peace mile jo aap deserve karte ho. Bhagwan aapko hamesha healthy rakhe, safe rakhe, aapke chehre ki ye pyaari si smile hamesha bani rahe aur aapko life mein kabhi kisi cheez ki kami mehsoos na ho. Aur haan babu, jab bhi aap udaas ho na, toh aapko ye yaad rahe ki aapko akele sab kuch handle karne ki zarurat nahi hai. Aap apni feelings share kar sakte ho, ro sakte ho, gussa kar sakte ho, chup reh sakte ho. Aapko har waqt strong banne ki zarurat nahi hai. ❤️🫂
+                </p>
+
+                <!-- Traditional and Night video call embeds -->
+                <div class="letter-photo-duo">
+                    <div class="letter-photo-embed">
+                        <img src="photos/ethnic_earrings.jpg" alt="Traditional" onclick="openLightbox('photos/ethnic_earrings.jpg', '✨ Aapki ye smile aur jhumke... sabse pyaari 💖')">
+                        <div class="letter-photo-caption">Aapki ye smile... sabse pyaari ✨</div>
+                    </div>
+                    <div class="letter-photo-embed">
+                        <img src="photos/videocall_night.jpg" alt="Night call" onclick="openLightbox('photos/videocall_night.jpg', '🌙 Har raat ka sukoon — Late night calls ❤️')">
+                        <div class="letter-photo-caption">Har raat ka sukoon 🌙❤️</div>
+                    </div>
+                </div>
+
+                <p class="letter-p">
+                    Aur meri Mini, ek baat bataun? Main aapke saath bahut saari chhoti chhoti cheezein jeena chahta hoon. Mujhe sirf bade bade moments nahi chahiye, mujhe aapke saath normal si life bhi chahiye. Aapke saath random baatein karna, aapko din bhar ki silly stories sunana, aapki complaints sunna, aapko chhedna, phir aapko manana, kabhi aapke saath bina kisi reason ke hasna aur kabhi bas aapke paas shaanti se baithna. Mujhe woh din bhi chahiye jab hum dono apne apne kaam se thak kar milenge aur phir ek doosre ko dekhkar lagega ki haan, ab ghar aa gaye. Mujhe woh pehla warm sa hug chahiye jiska main itna intezaar karta hoon. 🥹❤️🫂 Mujhe aapke saath woh saari memories banani hain jinke baare mein aaj hum sirf sochte hain. Aur ek din peeche mudkar dekhna hai ki dekho babu, humne kitna beautiful safar saath tay kiya.
+                </p>
+
+                <p class="letter-p">
+                    Main aapse koi fairy-tale wali perfect life ka promise nahi karna chahta, kyunki life hamesha perfect nahi hoti. Lekin main itna zaroor chahta hoon ki hum apni life mein ek doosre ke liye pyaar, respect, understanding aur sukoon banaye rakhein. Hum ek doosre ki growth ka reason banein, ek doosre ki achievements celebrate karein aur jab life difficult ho, tab bhi ek doosre ko samajhne ki koshish karein. Main chahta hoon ki aap mere saath apni har baat keh sako, bina dare, bina soche ki main kya sochunga. Main chahta hoon ki aapko mere saath woh comfort mile jahan aapko kuch pretend na karna pade. Aap jaisi ho, bilkul waise hi mere saamne reh sako. ❤️
+                </p>
+
+                <p class="letter-p">
+                    Aur haan, meri Babu, aapko pata hai na ki main aapko kitna tang karunga poori life? 😭😂 Aapko meri bakwaas sunni padegi, meri silly baaton par react karna padega, mere random plans jhelne padenge aur kabhi kabhi mujhe daantna bhi padega. Lekin uske badle mein main chahta hoon ki aapki life mein hamesha ek aisa insaan rahe jiske saath aap bachchon ki tarah hans sako, jiske saamne aap apni saari tension bhool sako aur jiske saath aapko har din thoda sa apnapan mile. Aur haan, aap kitna bhi gussa kar lena, meri nazron mein aap meri wahi pyaari si Mini rahogi. Meri Rini wali Mini, meri Babu. 😭❤️🎀
+                </p>
+
+                <p class="letter-p">
+                    Thank you meri jaan, meri life mein aane ke liye. Thank you mujhe itni saari beautiful memories dene ke liye. Thank you meri life ka itna important hissa banne ke liye. Thank you meri smiles, meri happiness aur mere itne saare emotions ki wajah banne ke liye. Shayad aapko khud bhi nahi pata ki aap mere liye kitna matter karte ho. Kabhi kabhi aapki ek chhoti si baat mera poora mood theek kar deti hai, aapki ek smile mera din bana deti hai aur aapse judi ek chhoti si memory bhi mere chehre par smile la deti hai. Aap meri life ki un cheezon mein se ho jinke liye main genuinely grateful hoon. ❤️🥹
+                </p>
+
+                <p class="letter-p">
+                    Happy birthday once again, meri jaan. Aaj ka din aapka hai, toh please khush rehna, smile karna, apne liye time nikalna aur apne aap ko feel karwana ki aap kitne precious ho. Aap deserve karte ho ki aapko celebrate kiya jaaye, aapko pyaar mile aur aapko life ki saari beautiful cheezein experience karne ko milein. Main dil se pray karta hoon ki aapka aane wala saal aapke liye bahut saari happiness, success, peace aur beautiful surprises lekar aaye. Aapke face par kabhi woh smile kam na ho jo mujhe itni pyaari lagti hai. 🧿❤️
+                </p>
+
+                <p class="letter-p">
+                    Aur babu, aapki age badh rahi hai, lekin mere liye aap hamesha meri woh cute si Mini rahogi jise main pyaar se tang karta hoon, jiske liye main itni saari baatein sochta hoon aur jiske saath main apni poori zindagi ke sapne dekhta hoon. 😭❤️
+                </p>
+
+                <p class="letter-p">
+                    I love you so, so, so much, meri Mini. More than I can explain, more than these words can ever express. Aap mere liye aaj bhi special ho, kal bhi rahoge aur meri dil se yahi wish hai ki aane wale har birthday par main aapko wish kar sakun, aapko khush dekh sakun aur aapke saath aur bhi beautiful memories bana sakun. I hope one day hum aapka birthday saath mein celebrate karein, bina distance ke, bina screen ke, bas aap aur main. Aapke saamne baithkar aapko wish karun, aapki smile dekhun aur aapko woh hug doon jiska itne time se intezaar hai. 🥹🫂❤️
+                </p>
+
+                <p class="letter-p">
+                    Happy Birthday meri Babu, meri jaan, meri Mini, my favourite human, my home and my forever favourite person. ❤️🎂🧿
+                </p>
+
+                <p class="letter-p">
+                    Aap hamesha khush raho, meri jaan. Aapko duniya ki saari khushiyan milein. Aur jab bhi aap apni life ke kisi bhi phase mein peeche mudkar dekho, I hope aapko yaad aaye ki koi tha jo aapki smile ke liye dil se pray karta tha, jo aapki happiness mein apni happiness dekhta tha aur jisne aapko apni life ke sabse beautiful dreams mein jagah di thi.
+                </p>
+
+                <p class="letter-p">
+                    I love you, Astha. Happy Birthday, meri Mini. Aap meri aaj ki khushi hi nahi, mere aane wale kal ka bhi woh hissa ho jise main dil se apne paas chahta hoon. ❤️😭🫂🎀
+                </p>
+
+                <div class="letter-sign">
+                    Forever your pagal,<br>
+                    Aapka duduu. ❤️
+                </div>
+            </div>
+            <div class="letter-footer">
+                <button class="btn-close-letter" onclick="closeLetterModal()">Close Letter & Watch Our Tree 🌸</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FULLSCREEN HD PHOTO LIGHTBOX MODAL (ZERO CROPPING) -->
+    <div id="photo-lightbox" class="lightbox-backdrop" style="display: none;" onclick="closeLightbox(event)">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox(event)" title="Close">✕</button>
+            <div class="lightbox-img-box">
+                <img id="lightbox-img" src="" alt="Full view photo">
+            </div>
+            <p id="lightbox-caption" class="lightbox-caption"></p>
+            <div class="lightbox-hint">Tap anywhere to close ✨</div>
+        </div>
+    </div>
+
+    <!-- CORE INTERACTION SCRIPTS -->
+    <script>
+    // Audio controller
+    var audio = document.getElementById("myAudio");
+    var musicBtn = document.getElementById("music-toggle");
+    var audioPlaying = false;
+
+    function playAudio() {
+        if (!audio) return;
+        audio.play().then(function() {
+            audioPlaying = true;
+            if (musicBtn) musicBtn.innerText = "🎵";
+        }).catch(function(err) {
+            console.log("Audio play error:", err);
+        });
+    }
+
+    function toggleAudio() {
+        if (!audio) return;
+        if (audio.paused) {
+            audio.play();
+            audioPlaying = true;
+            if (musicBtn) musicBtn.innerText = "🎵";
+        } else {
+            audio.pause();
+            audioPlaying = false;
+            if (musicBtn) musicBtn.innerText = "🔇";
+        }
+    }
+
+    // Curtains opening
+    function openCurtains() {
+        playAudio();
+        var curtain = document.getElementById("curtain-container");
+        if (curtain) {
+            curtain.classList.add("curtains-open");
+            // Immediately disable pointer events so clicks pass right through to canvas and hint
+            curtain.style.pointerEvents = "none";
+        }
+        triggerConfetti(60);
+        setTimeout(function() {
+            $("#seed-hint").fadeIn(600);
+        }, 800);
+    }
+
+    // Modal controllers
+    function openProposalModal() {
+        document.getElementById("proposal-modal").style.display = "flex";
+        // Reset buttons if reopened
+        var noBtn = document.getElementById("btn-marry-no");
+        if (noBtn) {
+            noBtn.style.position = "static";
+            noBtn.innerText = "No 🙈";
+        }
+    }
+
+    function closeProposalModal() {
+        document.getElementById("proposal-modal").style.display = "none";
+    }
+
+    function openLetterModal() {
+        document.getElementById("letter-modal").style.display = "flex";
+    }
+
+    function closeLetterModal() {
+        document.getElementById("letter-modal").style.display = "none";
+    }
+
+    function openGalleryModal() {
+        document.getElementById("gallery-modal").style.display = "flex";
+    }
+
+    function closeGalleryModal() {
+        document.getElementById("gallery-modal").style.display = "none";
+    }
+
+    function openLightbox(src, caption) {
+        var modal = document.getElementById("photo-lightbox");
+        var img = document.getElementById("lightbox-img");
+        var cap = document.getElementById("lightbox-caption");
+        if (!modal || !img) return;
+        img.src = src;
+        cap.innerHTML = caption || "";
+        modal.style.display = "flex";
+    }
+
+    function closeLightbox(e) {
+        if (e && e.target && e.target.id === 'lightbox-img') return;
+        var modal = document.getElementById("photo-lightbox");
+        if (modal) modal.style.display = "none";
+    }
+
+    document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape") {
+            closeLightbox();
+            closeGalleryModal();
+            closeLetterModal();
+            closeProposalModal();
+        }
+    });
+
+    function acceptProposal() {
+        document.getElementById("proposal-content").style.display = "none";
+        document.getElementById("proposal-accepted").style.display = "block";
+        triggerConfetti(150);
+    }
+
+    // Runaway "No" button logic
+    (function initRunawayNo() {
+        var noBtn = document.getElementById("btn-marry-no");
+        if (!noBtn) return;
+
+        var noTexts = [
+            "No 🙈",
+            "Pakad ke dikhao! 😂",
+            "Wrong button babu! 😜",
+            "Duduu ko chhod ke kahan jaogi? 😉",
+            "Only YES is accepted! ❤️",
+            "Soch bhi mat lena! 😝",
+            "Astha + Duduu = Forever! 💍"
+        ];
+        var noCount = 0;
+
+        function dodge(e) {
+            if (e && e.type === 'touchstart') e.preventDefault();
+            var card = document.querySelector(".proposal-card");
+            if (!card) return;
+
+            var cardRect = card.getBoundingClientRect();
+            var btnWidth = noBtn.offsetWidth || 100;
+            var btnHeight = noBtn.offsetHeight || 45;
+
+            var maxX = Math.max(30, cardRect.width - btnWidth - 40);
+            var maxY = Math.max(120, cardRect.height - btnHeight - 40);
+
+            var randomX = Math.floor(Math.random() * (maxX - 40)) + 20;
+            var randomY = Math.floor(Math.random() * (maxY - 140)) + 140;
+
+            noBtn.style.position = "absolute";
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+
+            noCount++;
+            noBtn.innerText = noTexts[noCount % noTexts.length];
+        }
+
+        noBtn.addEventListener("mouseenter", dodge);
+        noBtn.addEventListener("touchstart", dodge, { passive: false });
+    })();
+
+    // Relationship Live Counter (Official: 27/08/2019)
+    function updateRelationshipCounter() {
+        // 27th August 2019, 00:00:00 IST
+        var start = new Date(2019, 7, 27, 0, 0, 0);
+        var now = new Date();
+        var diff = now - start;
+        if (diff < 0) diff = 0;
+
+        var totalSeconds = Math.floor(diff / 1000);
+        var days = Math.floor(totalSeconds / (3600 * 24));
+        var remainingSeconds = totalSeconds % (3600 * 24);
+        var hours = Math.floor(remainingSeconds / 3600);
+        remainingSeconds %= 3600;
+        var minutes = Math.floor(remainingSeconds / 60);
+        var seconds = remainingSeconds % 60;
+
+        $("#rel-days").text(days);
+        $("#rel-hours").text(hours < 10 ? "0" + hours : hours);
+        $("#rel-mins").text(minutes < 10 ? "0" + minutes : minutes);
+        $("#rel-secs").text(seconds < 10 ? "0" + seconds : seconds);
+    }
+    setInterval(updateRelationshipCounter, 1000);
+    updateRelationshipCounter();
+
+    // Lightweight Confetti Particle Engine
+    var confettiCanvas = document.getElementById("confetti-canvas");
+    var confettiCtx = confettiCanvas ? confettiCanvas.getContext("2d") : null;
+    var particles = [];
+
+    function resizeConfetti() {
+        if (!confettiCanvas) return;
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeConfetti);
+    resizeConfetti();
+
+    function triggerConfetti(count) {
+        if (!confettiCanvas) return;
+        var colors = ["#ff4081", "#ffd700", "#ff69b4", "#00e5ff", "#76ff03", "#ffffff", "#ff1744"];
+        for (var i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * confettiCanvas.width,
+                y: Math.random() * confettiCanvas.height * 0.4,
+                w: Math.random() * 10 + 6,
+                h: Math.random() * 8 + 4,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                vx: (Math.random() - 0.5) * 6,
+                vy: Math.random() * 4 + 3,
+                rotation: Math.random() * 360,
+                vRot: (Math.random() - 0.5) * 10,
+                opacity: 1
+            });
+        }
+        if (!confettiAnimationRunning) {
+            confettiAnimationRunning = true;
+            renderConfetti();
+        }
+    }
+
+    var confettiAnimationRunning = false;
+    function renderConfetti() {
+        if (!confettiCtx) return;
+        confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+
+        for (var i = particles.length - 1; i >= 0; i--) {
+            var p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rotation += p.vRot;
+            p.opacity -= 0.005;
+
+            confettiCtx.save();
+            confettiCtx.translate(p.x, p.y);
+            confettiCtx.rotate((p.rotation * Math.PI) / 180);
+            confettiCtx.globalAlpha = Math.max(0, p.opacity);
+            confettiCtx.fillStyle = p.color;
+            confettiCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            confettiCtx.restore();
+
+            if (p.y > confettiCanvas.height || p.opacity <= 0) {
+                particles.splice(i, 1);
+            }
+        }
+
+        if (particles.length > 0) {
+            requestAnimationFrame(renderConfetti);
+        } else {
+            confettiAnimationRunning = false;
+            confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        }
+    }
+    </script>
+
+    <!-- LOVE TREE ANIMATION SCRIPT -->
     <script>
     (function() {
         var canvas = $('#canvas');
@@ -55,8 +635,8 @@
             return false;
         }
 
-        var width = canvas.width();
-        var height = canvas.height();        
+        var width = 1100;
+        var height = 680;        
         canvas.attr("width", width);
         canvas.attr("height", height);
 
@@ -94,29 +674,55 @@
                 height: 5,
                 speed: 10,
             }
-        }
+        };
 
         var tree = new Tree(canvas[0], width, height, opts);
         var seed = tree.seed;
         var foot = tree.footer;
         var hold = 1;
 
-        canvas.click(function(e) {
+        function triggerTreeGrowth() {
+            if (hold === 0) return;
+            hold = 0; 
+            $("#seed-hint").fadeOut(300);
+            canvas.unbind("click");
+            canvas.unbind("mousemove");
+            canvas.removeClass('hand');
+        }
+        window.triggerTreeGrowth = triggerTreeGrowth;
+
+        function handleCanvasTap(e) {
             playAudio();
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            if (seed.hover(x, y)) {
-                hold = 0; 
-                canvas.unbind("click");
-                canvas.unbind("mousemove");
-                canvas.removeClass('hand');
+            var offset = canvas.offset();
+            var pageX = e.pageX;
+            var pageY = e.pageY;
+            if (e.originalEvent && e.originalEvent.touches && e.originalEvent.touches.length > 0) {
+                pageX = e.originalEvent.touches[0].pageX;
+                pageY = e.originalEvent.touches[0].pageY;
             }
-        }).mousemove(function(e) {
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            canvas.toggleClass('hand', seed.hover(x, y));
+            var scaleX = canvas[0].width / (canvas.width() || 1100);
+            var scaleY = canvas[0].height / (canvas.height() || 680);
+            var x = (pageX - offset.left) * scaleX;
+            var y = (pageY - offset.top) * scaleY;
+            var dist = Math.hypot(x - seed.heart.point.x, y - seed.heart.point.y);
+            if (seed.hover(x, y) || dist < 160) {
+                triggerTreeGrowth();
+            }
+        }
+
+        canvas.on('click touchstart', handleCanvasTap).mousemove(function(e) {
+            var offset = canvas.offset();
+            var scaleX = canvas[0].width / (canvas.width() || 1100);
+            var scaleY = canvas[0].height / (canvas.height() || 680);
+            var x = (e.pageX - offset.left) * scaleX;
+            var y = (e.pageY - offset.top) * scaleY;
+            var dist = Math.hypot(x - seed.heart.point.x, y - seed.heart.point.y);
+            canvas.toggleClass('hand', seed.hover(x, y) || dist < 160);
+        });
+
+        $("#seed-hint").on('click touchstart', function() {
+            playAudio();
+            triggerTreeGrowth();
         });
 
         var seedAnimate = eval(Jscex.compile("async", function () {
@@ -159,13 +765,17 @@
             tree.snapshot("p2", 500, 0, 610, 680);
 
             canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
-            canvas.css("background", "#ffe");
+            canvas.css("background", "transparent");
             $await(Jscex.Async.sleep(300));
             canvas.css("background", "none");
         }));
 
         var textAnimate = eval(Jscex.compile("async", function () {
-            $("#code").show().typewriter();
+            $("#code").fadeIn(600).typewriter(function() {
+                $("#action-buttons").addClass("show");
+            });
+            $await(Jscex.Async.sleep(1200));
+            $("#action-buttons").addClass("show");
         }));
 	    
         var runAsync = eval(Jscex.compile("async", function () {

@@ -1,5 +1,3 @@
-
-
 // variables
 var $win = $(window);
 var clientWidth = $win.width();
@@ -13,26 +11,69 @@ $(window).resize(function() {
     }
 });
 
+// Smooth, Glitch-Free Typewriter Engine
 (function($) {
-	$.fn.typewriter = function() {
-		this.each(function() {
-			var $ele = $(this), str = $ele.html(), progress = 0;
-			$ele.html('');
-			var timer = setInterval(function() {
-				var current = str.substr(progress, 1);
-				if (current == '<') {
-					progress = str.indexOf('>', progress) + 1;
-				} else {
-					progress++;
-				}
-				$ele.html(str.substring(0, progress) + (progress & 1 ? '_' : ''));
-				if (progress >= str.length) {
-					clearInterval(timer);
-				}
-			}, 75);
-		});
-		return this;
-	};
+    $.fn.typewriter = function(callback) {
+        return this.each(function() {
+            var $ele = $(this);
+            var originalHtml = $ele.html();
+            $ele.html('').css('visibility', 'visible');
+
+            var $content = $('<span class="typed-content"></span>');
+            var $cursor = $('<span class="typed-cursor">|</span>');
+            $ele.append($content).append($cursor);
+
+            var progress = 0;
+            var len = originalHtml.length;
+            var speed = 40;
+
+            function step() {
+                if (progress >= len) {
+                    setTimeout(function() {
+                        $cursor.fadeOut(400, function() {
+                            $(this).remove();
+                        });
+                        if (typeof callback === 'function') {
+                            callback();
+                        }
+                    }, 500);
+                    return;
+                }
+
+                var char = originalHtml.charAt(progress);
+                if (char === '<') {
+                    var endTag = originalHtml.indexOf('>', progress);
+                    if (endTag !== -1) {
+                        progress = endTag + 1;
+                    } else {
+                        progress++;
+                    }
+                } else if (char === '&') {
+                    var endEntity = originalHtml.indexOf(';', progress);
+                    if (endEntity !== -1 && endEntity - progress < 10) {
+                        progress = endEntity + 1;
+                    } else {
+                        progress++;
+                    }
+                } else {
+                    progress++;
+                }
+
+                $content.html(originalHtml.substring(0, progress));
+
+                var currentDelay = speed;
+                if (char === '.' || char === '!' || char === '?') {
+                    currentDelay = 100;
+                } else if (char === ',') {
+                    currentDelay = 70;
+                }
+
+                setTimeout(step, currentDelay);
+            }
+
+            step();
+        });
+    };
 })(jQuery);
 
 function timeElapse(date){
@@ -58,5 +99,4 @@ function timeElapse(date){
 
 	var text = "THE WORLD JUST GOT LUCKIER SINCE ";
 	$("#message-box").html(text);
-
 }
